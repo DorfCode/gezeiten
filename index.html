@@ -778,7 +778,6 @@
 
     // Konfetti ohne fremde Bibliothek: Canvas über der Seite, Klicks gehen durch
     function runConfetti(opts = {}) {
-        if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         const colors = opts.colors || ['#ff3d00', '#ffc400', '#00c853', '#2979ff', '#d500f9', '#ffffff'];
         const duration = opts.duration || 3500;
         const cv = document.createElement('canvas');
