@@ -746,7 +746,7 @@
     updateTheadHeight();
     window.addEventListener('resize', updateTheadHeight);
 
-    // ---- Geburtstage: Konfetti (ohne Text), wenn das heutige Datum in geburtstage.csv steht ----
+    // ---- Geburtstage: Konfetti (ohne Text), wenn das heutige Datum in celebrations.csv steht ----
     // Format je Zeile: "TT.MM." oder "TT.MM.JJJJ" (Jahr wird ignoriert), # = Kommentar
     function parseBirthdays(text) {
         const list = [];
@@ -762,7 +762,7 @@
 
     async function checkBirthdays() {
         try {
-            const res = await fetch('geburtstage.csv', { cache: 'no-store' });
+            const res = await fetch('celebrations.csv', { cache: 'no-store' });
             if (!res.ok) return;
             const today = new Date();
             const isToday = parseBirthdays(await res.text())

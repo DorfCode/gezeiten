@@ -1,4 +1,4 @@
-# Geburtstage für die Gezeiten-Seite
+# Termine mit Konfetti für die Gezeiten-Seite (celebrations.csv)
 # An diesen Tagen fällt beim Öffnen der Seite kurz Konfetti – ohne Text, ohne Namen.
 #
 # Format: ein Datum pro Zeile, als TT.MM. oder TT.MM.JJJJ (das Jahr wird ignoriert)
