@@ -746,17 +746,16 @@
     updateTheadHeight();
     window.addEventListener('resize', updateTheadHeight);
 
-    // ---- Geburtstage: Konfetti-Gruß, wenn das heutige Datum in geburtstage.csv steht ----
-    // Format je Zeile: "TT.MM.;Name" oder "TT.MM.JJJJ;Name" (Jahr wird ignoriert), # = Kommentar
+    // ---- Geburtstage: Konfetti (ohne Text), wenn das heutige Datum in geburtstage.csv steht ----
+    // Format je Zeile: "TT.MM." oder "TT.MM.JJJJ" (Jahr wird ignoriert), # = Kommentar
     function parseBirthdays(text) {
         const list = [];
         for (const raw of String(text).split(/\r?\n/)) {
             const line = raw.trim();
             if (!line || line.startsWith('#')) continue;
-            const [date, ...rest] = line.split(/[;,]/);
-            const name = rest.join(',').trim();
-            const m = String(date).trim().match(/^(\d{1,2})\.(\d{1,2})\.?(\d{2,4})?$/);
-            if (m && name) list.push({ day: Number(m[1]), month: Number(m[2]), name });
+            // nur das Datum zählt; alles nach ; oder , wird ignoriert
+            const m = line.split(/[;,]/)[0].trim().match(/^(\d{1,2})\.(\d{1,2})\.?(\d{2,4})?$/);
+            if (m) list.push({ day: Number(m[1]), month: Number(m[2]) });
         }
         return list;
     }
@@ -766,13 +765,9 @@
             const res = await fetch('geburtstage.csv', { cache: 'no-store' });
             if (!res.ok) return;
             const today = new Date();
-            const names = parseBirthdays(await res.text())
-                .filter(b => b.day === today.getDate() && b.month === today.getMonth() + 1)
-                .map(b => b.name);
-            if (!names.length) return;
-            const who = names.length === 1 ? names[0]
-                : names.slice(0, -1).join(', ') + ' und ' + names[names.length - 1];
-            runConfetti({ message: `🎉 Alles Gute, ${who}!` });
+            const isToday = parseBirthdays(await res.text())
+                .some(b => b.day === today.getDate() && b.month === today.getMonth() + 1);
+            if (isToday) runConfetti();   // nur Konfetti, ohne Text
         } catch (e) { /* ohne Datei oder bei Fehlern einfach keine Animation */ }
     }
 

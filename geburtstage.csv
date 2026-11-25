@@ -1,12 +1,11 @@
 # Geburtstage für die Gezeiten-Seite
-# An diesen Tagen erscheint beim Öffnen der Seite kurz Konfetti mit Glückwunsch.
+# An diesen Tagen fällt beim Öffnen der Seite kurz Konfetti – ohne Text, ohne Namen.
 #
-# Format: Datum;Name   (eine Zeile pro Eintrag)
-#   Datum als TT.MM. oder TT.MM.JJJJ – das Jahr wird ignoriert
+# Format: ein Datum pro Zeile, als TT.MM. oder TT.MM.JJJJ (das Jahr wird ignoriert)
+#   Alles nach ; oder , in der Zeile wird ignoriert
 #   Zeilen mit # am Anfang und leere Zeilen werden übersprungen
 #
-# ACHTUNG: Diese Datei ist öffentlich (Repository und Webseite).
-# Nur eintragen, was jeder sehen darf – z. B. Vornamen ohne Geburtsjahr.
+# Diese Datei ist öffentlich (Repository und Webseite) – daher nur Termine, keine Namen.
 #
 # Beispiele (zum Aktivieren das # entfernen):
 # 21.02.;
