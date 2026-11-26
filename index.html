@@ -762,7 +762,8 @@
 
     async function checkBirthdays() {
         try {
-            const res = await fetch('celebrations.csv', { cache: 'no-store' });
+            // wechselnder Zusatz (?t=…), damit Cloudflare die Datei nicht aus dem Zwischenspeicher liefert
+            const res = await fetch(`celebrations.csv?t=${Date.now()}`, { cache: 'no-store' });
             if (!res.ok) return;
             const today = new Date();
             const isToday = parseBirthdays(await res.text())
